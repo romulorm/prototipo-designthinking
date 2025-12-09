@@ -1,1 +1,1 @@
-# prototipo-designthinking
+# Repositório do trabalho de Design Thinking

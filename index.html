@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PCDF - Sistema de Ocorrências</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <script>
+        // Função JavaScript para trocar as abas
+        function abrirAba(idAba, elemento) {
+            // Esconde todas as abas
+            const abas = document.querySelectorAll('.conteudo-aba');
+            abas.forEach(aba => {
+                aba.style.display = 'none';
+            });
+
+            // Remove a classe 'ativa' de todos os botões de aba
+            const botoesAba = document.querySelectorAll('.botao-aba');
+            botoesAba.forEach(botao => {
+                botao.classList.remove('ativa');
+            });
+
+            // Mostra a aba específica
+            document.getElementById(idAba).style.display = 'block';
+
+            // Adiciona a classe 'ativa' ao botão clicado
+            elemento.classList.add('ativa');
+        }
+
+        // Garante que a primeira aba esteja ativa ao carregar
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelector('.botao-aba').click();
+        });
+    </script>
+</head>
+<body>
+
+    <header class="cabecalho">
+        <img src="images/brasao.png" alt="Logo do Site" class="logo">
+        <h1>PCDF - Sistema de Ocorrências</h1>
+    </header>
+
+    <div class="container-principal">
+
+        <nav class="menu-lateral">
+            <h2>Formulários</h2>
+            <a href="#" class="botao-menu">Dados básicos</a>
+            <a href="#" class="botao-menu">Envolvidos</a>
+            <a href="#" class="botao-menu">Veículos</a>
+            <a href="#" class="botao-menu">Objetos</a>
+        </nav>
+
+        <main class="corpo-principal">
+            
+            <div class="container-abas">
+                <button class="botao-aba" onclick="abrirAba('aba1', this)">Dados básicos - manual</button>
+                <button class="botao-aba" onclick="abrirAba('aba2', this)">Dados básicos - IA</button>
+            </div>
+
+            <div id="aba1" class="conteudo-aba">
+                <h2>Preencimento manual</h2>
+                <div class="formulario-container">
+                    <h3>Detalhes do Cadastro</h3>
+                    <form action="/processar_cadastro" method="POST">
+                        
+                        <div class="campo-formulario">
+                            <label for="nome">Nome Completo:</label>
+                            <input type="text" id="nome" name="nome" required>
+                        </div>
+
+                        <div class="campo-formulario">
+                            <label for="endereco">Endereço:</label>
+                            <input type="text" id="endereco" name="endereco" required>
+                        </div>
+
+                        <div class="campo-formulario">
+                            <label for="historico">Histórico/Observações:</label>
+                            <textarea id="historico" name="historico" rows="4"></textarea>
+                        </div>
+
+                        <div class="campo-formulario">
+                            <label for="envolvimento">Nível de Envolvimento:</label>
+                            <select id="envolvimento" name="envolvimento" required>
+                                <option value="" disabled selected>Selecione uma opção</option>
+                                <option value="Autor">Autor</option>
+                                <option value="Comunicante">Comunicante</option>
+                                <option value="Testemunha">Testemunha</option>
+                                <option value="Vítima">Vítima</option>
+                            </select>
+                        </div>
+
+                        <div class="campo-formulario">
+                            <button type="submit" class="botao-submit">Salvar Cadastro</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+            <div id="aba2" class="conteudo-aba" style="display: none;">
+                <h2>Preencimento por IA</h2>
+                <div class="formulario-container">
+                    <h3>Etapas para depoimento automatizado:</h3>
+                    <div class="gravar">
+                        <p class="titulo">Etapa 1 - Gravação do depoimento</p>
+                        <button class="botao-submit">Gravar áudio</button>
+                        <p class="status">Status: Pronto para gravar</p>
+                    </div>
+                    <hr>
+                    <div class="transcrever">
+                        <p class="titulo">Etapa 2 - Transcrição</p><button class="botao-submit">Transcrever áudio</button>
+                        <p class="status">Status: Aguardando gravação</p>
+                    </div>
+                    <hr>
+                    <div class="anonimizar">
+                        <p class="titulo">Etapa 3 - Anonimização dos dados</p>
+                        <button class="botao-submit">Anonimizar dados</button>
+                        <p class="status">Status: Aguardando transcrição</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+</body>
+</html>
